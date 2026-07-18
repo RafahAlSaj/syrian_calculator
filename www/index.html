@@ -1,0 +1,184 @@
+﻿<!doctype html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="theme-color" content="#1e3a8a" />
+        <link rel="manifest" href="./manifest.webmanifest" />
+        <link rel="icon" href="./assets/icons/icon-192.png" type="image/png" />
+        <link rel="apple-touch-icon" href="./assets/icons/icon-192.png" />
+        <link rel="stylesheet" href="./assets/style.css" />
+        <title>الحاسبة السورية</title>
+    </head>
+    <body>
+        <div class="app">
+            <header class="topbar">
+                <button class="mode-btn" type="button" data-mode="receive" aria-pressed="false">قبض</button>
+                <h1 class="title">الحاسبة السورية</h1>
+                <button class="mode-btn" type="button" data-mode="pay" aria-pressed="true">دفع</button>
+            </header>
+
+            <main class="stack">
+                <section class="card card-amber">
+                    <div class="card-head">
+                        <h2 class="card-title">سعر الخدمة / المنتج</h2>
+                        <button id="topReset" class="card-reset" type="button" aria-label="مسح كل الحقول من الأعلى">
+                            مسح
+                        </button>
+                    </div>
+                    <div class="grid2">
+                        <label class="field field-amber">
+                            <span class="field-label">ليرة قديمة 🏛️</span>
+                            <input id="priceOld" class="field-input" inputmode="decimal" placeholder="0" />
+                        </label>
+                        <label class="field field-green">
+                            <span class="field-label">ليرة جديدة ✨</span>
+                            <input id="priceNew" class="field-input" inputmode="decimal" placeholder="0" />
+                        </label>
+                        <label class="field field-emerald">
+                            <div class="field-head">
+                                <span class="field-label">دولار أمريكي</span>
+                                <div class="rate-chip-area">
+                                    <button class="rate-chip" id="priceUsdRateChip" type="button"
+                                        aria-label="سعر الدولار بالجديدة" aria-haspopup="dialog"
+                                        aria-controls="priceUsdRatePopover" aria-expanded="false"></button>
+                                    <button class="rate-gear" id="priceUsdRateBtn" type="button"
+                                        aria-label="تعديل سعر الدولار" aria-haspopup="dialog"
+                                        aria-controls="priceUsdRatePopover" aria-expanded="false">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path
+                                                d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 00.12-.64l-1.92-3.32a.5.5 0 00-.6-.22l-2.39.96a7.1 7.1 0 00-1.63-.94l-.36-2.54A.5.5 0 0013.9 1h-3.8a.5.5 0 00-.49.42l-.36 2.54c-.58.23-1.12.54-1.63.94l-2.39-.96a.5.5 0 00-.6.22L2.71 7.48a.5.5 0 00.12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94L2.83 14.52a.5.5 0 00-.12.64l1.92 3.32c.13.23.4.32.64.22l2.39-.96c.5.39 1.05.71 1.63.94l.36 2.54c.04.24.25.42.49.42h3.8c.24 0 .45-.18.49-.42l.36-2.54c.58-.23 1.12-.54 1.63-.94l2.39.96c.24.1.51.01.64-.22l1.92-3.32a.5.5 0 00-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1112 8a3.5 3.5 0 010 7.5z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <input id="priceUsd" class="field-input field-input-compact" inputmode="decimal"
+                                placeholder="0" />
+                            <div class="rate-popover" id="priceUsdRatePopover" hidden>
+                                <div class="rate-popover-title">سعر الدولار بالليرة الجديدة</div>
+                                <input id="priceUsdRate" class="rate-input rate-popover-input" inputmode="decimal" />
+                            </div>
+                        </label>
+                        <label class="field field-rose">
+                            <div class="field-head">
+                                <span class="field-label">ليرة تركية</span>
+                                <div class="rate-chip-area">
+                                    <button class="rate-chip" id="priceTryRateChip" type="button"
+                                        aria-label="سعر التركية بالجديدة" aria-haspopup="dialog"
+                                        aria-controls="priceTryRatePopover" aria-expanded="false"></button>
+                                    <button class="rate-gear" id="priceTryRateBtn" type="button"
+                                        aria-label="تعديل سعر التركية" aria-haspopup="dialog"
+                                        aria-controls="priceTryRatePopover" aria-expanded="false">
+                                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                                            <path
+                                                d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 00.12-.64l-1.92-3.32a.5.5 0 00-.6-.22l-2.39.96a7.1 7.1 0 00-1.63-.94l-.36-2.54A.5.5 0 0013.9 1h-3.8a.5.5 0 00-.49.42l-.36 2.54c-.58.23-1.12.54-1.63.94l-2.39-.96a.5.5 0 00-.6.22L2.71 7.48a.5.5 0 00.12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94L2.83 14.52a.5.5 0 00-.12.64l1.92 3.32c.13.23.4.32.64.22l2.39-.96c.5.39 1.05.71 1.63.94l.36 2.54c.04.24.25.42.49.42h3.8c.24 0 .45-.18.49-.42l.36-2.54c.58-.23 1.12-.54 1.63-.94l2.39.96c.24.1.51.01.64-.22l1.92-3.32a.5.5 0 00-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1112 8a3.5 3.5 0 010 7.5z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <input id="priceTry" class="field-input field-input-compact" inputmode="decimal"
+                                placeholder="0" />
+                            <div class="rate-popover" id="priceTryRatePopover" hidden>
+                                <div class="rate-popover-title">سعر التركية بالليرة الجديدة</div>
+                                <input id="priceTryRate" class="rate-input rate-popover-input" inputmode="decimal" />
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="card card-blue">
+                    <h2 class="card-title" id="paymentsTitle">المدفوعات</h2>
+                    <div class="grid2">
+                        <label class="field field-amber">
+                            <span class="field-label" id="paidOldLabel">مدفوع قديم 🏛️</span>
+                            <input id="paidOld" class="field-input" inputmode="decimal" placeholder="0" />
+                        </label>
+                        <label class="field field-green">
+                            <span class="field-label" id="paidNewLabel">مدفوع جديد ✨</span>
+                            <input id="paidNew" class="field-input" inputmode="decimal" placeholder="0" />
+                        </label>
+                        <label class="field field-emerald">
+                            <span class="field-label">دولار أمريكي</span>
+                            <input id="paidUsd" class="field-input field-input-compact" inputmode="decimal"
+                                placeholder="0" />
+                        </label>
+                        <label class="field field-rose">
+                            <span class="field-label">ليرة تركية</span>
+                            <input id="paidTry" class="field-input field-input-compact" inputmode="decimal"
+                                placeholder="0" />
+                        </label>
+                    </div>
+                </section>
+
+                <section class="card" id="resultCard">
+                    <h2 class="card-title" id="resultTitle">تم التسديد</h2>
+                    <div class="grid2">
+                        <div class="result-item result-old">
+                            <div class="result-label">ليرة قديمة 🏛️</div>
+                            <div class="result-value" id="settledOld">0</div>
+                        </div>
+                        <div class="result-item result-new">
+                            <div class="result-label">ليرة جديدة ✨</div>
+                            <div class="result-value" id="settledNew">0</div>
+                        </div>
+                    </div>
+                    <div class="balance-box" id="balanceBox">
+                        <div class="balance-title" id="balanceTitle">الباقي</div>
+                        <div class="grid2">
+                            <div class="result-item result-old">
+                                <div class="result-label">ليرة قديمة 🏛️</div>
+                                <div class="result-value" id="balanceOld">0</div>
+                            </div>
+                            <div class="result-item result-new">
+                                <div class="result-label">ليرة جديدة ✨</div>
+                                <div class="result-value" id="balanceNew">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <footer class="footer">
+                <div class="footer-brand">
+                    <a id="mirawareWebsiteLink" href="https://www.miraware.net/" target="_blank" rel="noopener noreferrer" aria-label="Miraware Website">
+                        <img class="footer-logo" src="./assets/icons/footer-logo.png" alt="Miraware" />
+                    </a>
+                    <button id="resetAll" class="footer-reset" type="button" aria-label="مسح كل الحقول">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M12 5a7 7 0 017 7 7 7 0 01-7 7 7 7 0 01-6.7-5H7a.75.75 0 000-1.5H4.5a.75.75 0 00-.75.75V15a.75.75 0 001.5 0v-1.02A8.5 8.5 0 1012 3.5c-2.2 0-4.22.84-5.74 2.22a.75.75 0 001.01 1.11A6.96 6.96 0 0112 5z" />
+                        </svg>
+                        <span>مسح</span>
+                    </button>
+                    <div class="footer-social">
+                        <a class="social-link" id="facebookLink" href="https://www.facebook.com/Mirawarenet"
+                            target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.6-1.5h1.7V4c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1V10H8v3h2.4v8h3.1z" />
+                            </svg>
+                        </a>
+                        <a class="social-link" id="instagramLink"
+                            href="https://www.instagram.com/miraware.web?igsh=ZTJmbTU4cXdnaDdr" target="_blank"
+                            rel="noopener noreferrer" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M12 7.3A4.7 4.7 0 1016.7 12 4.7 4.7 0 0012 7.3zm0 7.7A3 3 0 1115 12a3 3 0 01-3 3zm6-7.9a1.1 1.1 0 11-1.1-1.1A1.1 1.1 0 0118 7.1zM12 2.8c3 0 3.4 0 4.6.1 1 .1 1.6.2 2 .4.5.2.9.4 1.3.8.4.4.6.8.8 1.3.2.4.3 1 .4 2 .1 1.2.1 1.6.1 4.6s0 3.4-.1 4.6c-.1 1-.2 1.6-.4 2a3.3 3.3 0 01-.8 1.3 3.3 3.3 0 01-1.3.8c-.4.2-1 .3-2 .4-1.2.1-1.6.1-4.6.1s-3.4 0-4.6-.1c-1-.1-1.6-.2-2-.4a3.3 3.3 0 01-1.3-.8 3.3 3.3 0 01-.8-1.3c-.2-.4-.3-1-.4-2C2.8 15.4 2.8 15 2.8 12s0-3.4.1-4.6c.1-1 .2-1.6.4-2 .2-.5.4-.9.8-1.3.4-.4.8-.6 1.3-.8.4-.2 1-.3 2-.4 1.2-.1 1.6-.1 4.6-.1zm0-1.8C8.9 1 8.5 1 7.2 1.1 5.9 1.2 5 1.4 4.3 1.7a5.3 5.3 0 00-1.9 1.2 5.3 5.3 0 00-1.2 1.9c-.3.7-.5 1.6-.6 2.9C.5 8.5.5 8.9.5 12s0 3.5.1 4.8c.1 1.3.3 2.2.6 2.9a5.3 5.3 0 001.2 1.9 5.3 5.3 0 001.9 1.2c.7.3 1.6.5 2.9.6C8.5 23.5 8.9 23.5 12 23.5s3.5 0 4.8-.1c1.3-.1 2.2-.3 2.9-.6a5.3 5.3 0 001.9-1.2 5.3 5.3 0 001.2-1.9c.3-.7.5-1.6.6-2.9.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.3-.3-2.2-.6-2.9a5.3 5.3 0 00-1.2-1.9 5.3 5.3 0 00-1.9-1.2c-.7-.3-1.6-.5-2.9-.6C15.5 1 15.1 1 12 1z" />
+                            </svg>
+                        </a>
+                        <a class="social-link" id="linkedinLink"
+                            href="https://www.linkedin.com/company/miraware/?originalSubdomain=sy" target="_blank"
+                            rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                    d="M4.98 3.5A2.5 2.5 0 107.5 6 2.5 2.5 0 004.98 3.5zM3 8h4v13H3zM10 8h3.8v1.8h.1a4.2 4.2 0 013.8-2.1c4.1 0 4.9 2.7 4.9 6.3V21h-4v-6.2c0-1.5 0-3.4-2.1-3.4s-2.4 1.6-2.4 3.3V21h-4z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script src="./assets/app.js" type="module"></script>
+    </body>
+</html>

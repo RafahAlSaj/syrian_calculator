@@ -1,0 +1,21 @@
+{
+  "name": "syrian_calculator",
+  "version": "1.0.0",
+  "main": "sw.js",
+  "scripts": {
+    "build:web": "node -e \"console.log('Static web assets are already in www/')\"",
+    "cap:sync": "npx cap sync android",
+    "android:open": "npx cap open android",
+    "apk:debug": "cd android && gradlew.bat assembleDebug",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@capacitor/android": "^8.1.0",
+    "@capacitor/cli": "^7.5.0",
+    "@capacitor/core": "^8.1.0"
+  }
+}

@@ -1,0 +1,83 @@
+name: Build Android
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+
+      - name: Install dependencies
+        run: npm install
+
+
+      - name: Sync Capacitor Android
+        run: npx cap sync android
+
+
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore-generated.jks
+
+
+      - name: Create keystore.properties
+        run: |
+          cat <<EOF > android/keystore.properties
+          storeFile=app/upload-keystore-generated.jks
+          storePassword=${{ secrets.STORE_PASSWORD }}
+          keyAlias=${{ secrets.KEY_ALIAS }}
+          keyPassword=${{ secrets.KEY_PASSWORD }}
+          EOF
+
+
+      - name: Grant Gradle permission
+        run: chmod +x android/gradlew
+
+
+      - name: Build Release APK
+        working-directory: android
+        run: ./gradlew assembleRelease
+
+
+      - name: Build Release AAB
+        working-directory: android
+        run: ./gradlew bundleRelease
+
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-apk
+          path: android/app/build/outputs/apk/release/*.apk
+
+
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-aab
+          path: android/app/build/outputs/bundle/release/*.aab

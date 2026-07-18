@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Local tools
+.tools/
+
+# Android build
+android/.gradle/
+android/build/
+android/app/build/
+
+# Signing
+*.jks
+*.keystore
+keystore.properties
+keystore_base64.txt
+
+# Release files
+ready/*.apk
+ready/*.aab
+ready/*.idsig
+
+# Build logs
+android/*.txt
+*.log
+
+# IDE
+.vscode/
