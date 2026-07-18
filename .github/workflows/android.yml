@@ -42,7 +42,7 @@ jobs:
 
       - name: Decode keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore-generated.jks
+          echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/app/upload-keystore-generated.jks
 
 
       - name: Create keystore.properties
