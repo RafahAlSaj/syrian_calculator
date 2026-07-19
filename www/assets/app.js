@@ -789,6 +789,25 @@ function bindAmountFieldFormatting() {
 }
 
 function bindEvents() {
+    // Theme Toggle Logic
+    const themeToggle = el("themeToggle");
+    const sunIcon = themeToggle.querySelector(".sun-icon");
+    const moonIcon = themeToggle.querySelector(".moon-icon");
+
+    themeToggle.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark-mode");
+        sunIcon.style.display = isDark ? "none" : "block";
+        moonIcon.style.display = isDark ? "block" : "none";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        sunIcon.style.display = "none";
+        moonIcon.style.display = "block";
+    }
+
     if (ui.mirawareWebsiteLink) {
         ui.mirawareWebsiteLink.addEventListener("click", (ev) => {
             ev.preventDefault();
