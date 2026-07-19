@@ -401,10 +401,16 @@ function fitAllAmountInputs() {
 }
 
 function fitResultValues() {
-    fitTextToBox(ui.settledOld, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
-    fitTextToBox(ui.settledNew, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
-    fitTextToBox(ui.balanceOld, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
-    fitTextToBox(ui.balanceNew, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
+    const values = [ui.settledOld, ui.settledNew, ui.balanceOld, ui.balanceNew];
+    values.forEach(node => {
+        if (!node) return;
+        fitTextToBox(node, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
+        
+        // Add pulse animation
+        node.classList.remove("result-pulse");
+        void node.offsetWidth; // Trigger reflow
+        node.classList.add("result-pulse");
+    });
 }
 
 function setNeutralResultMessage(message) {
