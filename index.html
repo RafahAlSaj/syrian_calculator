@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ar" dir="rtl">
     <head>
         <meta charset="UTF-8" />
@@ -10,10 +10,16 @@
         <link rel="stylesheet" href="./assets/style.css" />
         <title>الحاسبة السورية</title>
     </head>
-    <body>
+    <body class="light-mode">
         <div class="app">
             <header class="topbar">
-                <button class="mode-btn" type="button" data-mode="receive" aria-pressed="false">قبض</button>
+                <div class="topbar-left">
+                    <button class="mode-btn" type="button" data-mode="receive" aria-pressed="false">قبض</button>
+                    <button id="themeToggle" class="theme-toggle" type="button" aria-label="تبديل الوضع الليلي">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </button>
+                </div>
                 <h1 class="title">الحاسبة السورية</h1>
                 <button class="mode-btn" type="button" data-mode="pay" aria-pressed="true">دفع</button>
             </header>
@@ -28,16 +34,16 @@
                     </div>
                     <div class="grid2">
                         <label class="field field-amber">
-                            <span class="field-label">ليرة قديمة 🏛️</span>
+                            <span class="field-label"><span class="currency-flag">🏛️</span> ليرة قديمة</span>
                             <input id="priceOld" class="field-input" inputmode="decimal" placeholder="0" />
                         </label>
                         <label class="field field-green">
-                            <span class="field-label">ليرة جديدة ✨</span>
+                            <span class="field-label"><span class="currency-flag">✨</span> ليرة جديدة</span>
                             <input id="priceNew" class="field-input" inputmode="decimal" placeholder="0" />
                         </label>
                         <label class="field field-emerald">
                             <div class="field-head">
-                                <span class="field-label">دولار أمريكي</span>
+                                <span class="field-label"><span class="currency-flag">🇺🇸</span> دولار أمريكي</span>
                                 <div class="rate-chip-area">
                                     <button class="rate-chip" id="priceUsdRateChip" type="button"
                                         aria-label="سعر الدولار بالجديدة" aria-haspopup="dialog"
@@ -61,7 +67,7 @@
                         </label>
                         <label class="field field-rose">
                             <div class="field-head">
-                                <span class="field-label">ليرة تركية</span>
+                                <span class="field-label"><span class="currency-flag">🇹🇷</span> ليرة تركية</span>
                                 <div class="rate-chip-area">
                                     <button class="rate-chip" id="priceTryRateChip" type="button"
                                         aria-label="سعر التركية بالجديدة" aria-haspopup="dialog"
@@ -90,20 +96,20 @@
                     <h2 class="card-title" id="paymentsTitle">المدفوعات</h2>
                     <div class="grid2">
                         <label class="field field-amber">
-                            <span class="field-label" id="paidOldLabel">مدفوع قديم 🏛️</span>
+                            <span class="field-label" id="paidOldLabel"><span class="currency-flag">🏛️</span> مدفوع قديم</span>
                             <input id="paidOld" class="field-input" inputmode="decimal" placeholder="0" />
                         </label>
                         <label class="field field-green">
-                            <span class="field-label" id="paidNewLabel">مدفوع جديد ✨</span>
+                            <span class="field-label" id="paidNewLabel"><span class="currency-flag">✨</span> مدفوع جديد</span>
                             <input id="paidNew" class="field-input" inputmode="decimal" placeholder="0" />
                         </label>
                         <label class="field field-emerald">
-                            <span class="field-label">دولار أمريكي</span>
+                            <span class="field-label"><span class="currency-flag">🇺🇸</span> دولار أمريكي</span>
                             <input id="paidUsd" class="field-input field-input-compact" inputmode="decimal"
                                 placeholder="0" />
                         </label>
                         <label class="field field-rose">
-                            <span class="field-label">ليرة تركية</span>
+                            <span class="field-label"><span class="currency-flag">🇹🇷</span> ليرة تركية</span>
                             <input id="paidTry" class="field-input field-input-compact" inputmode="decimal"
                                 placeholder="0" />
                         </label>
@@ -114,11 +120,11 @@
                     <h2 class="card-title" id="resultTitle">تم التسديد</h2>
                     <div class="grid2">
                         <div class="result-item result-old">
-                            <div class="result-label">ليرة قديمة 🏛️</div>
+                            <div class="result-label"><span class="currency-flag">🏛️</span> ليرة قديمة</div>
                             <div class="result-value" id="settledOld">0</div>
                         </div>
                         <div class="result-item result-new">
-                            <div class="result-label">ليرة جديدة ✨</div>
+                            <div class="result-label"><span class="currency-flag">✨</span> ليرة جديدة</div>
                             <div class="result-value" id="settledNew">0</div>
                         </div>
                     </div>
@@ -126,19 +132,37 @@
                         <div class="balance-title" id="balanceTitle">الباقي</div>
                         <div class="grid2">
                             <div class="result-item result-old">
-                                <div class="result-label">ليرة قديمة 🏛️</div>
+                                <div class="result-label"><span class="currency-flag">🏛️</span> ليرة قديمة</div>
                                 <div class="result-value" id="balanceOld">0</div>
                             </div>
                             <div class="result-item result-new">
-                                <div class="result-label">ليرة جديدة ✨</div>
+                                <div class="result-label"><span class="currency-flag">✨</span> ليرة جديدة</div>
                                 <div class="result-value" id="balanceNew">0</div>
                             </div>
                         </div>
                     </div>
                 </section>
 
-            </main>
+                <section class="card card-info-box">
+                    <div class="card-head">
+                        <h2 class="card-title">آلية التحويل المالي ونظرة عامة</h2>
+                    </div>
+                    <div class="info-content">
+                        <p>يواجه المتعاملون بالعملة السورية مشكلة الاختلاف الحسابي بين <strong>"الليرة القديمة"</strong> و<strong>"الليرة الجديدة"</strong>. حيث صدرت الليرة الجديدة كفئة موازية تعادل 100 ضعف الليرة القديمة لتبسيط وتسهيل الحسابات النقدية والمعاملات التجارية وتفادي الأرقام الفلكية.</p>
+                        
+                        <div class="info-divider"></div>
+                        
+                        <h3 class="info-subtitle">العملية الرياضية المتبعة في هذه الحاسبة:</h3>
+                        <ul class="info-list">
+                            <li>يتم توحيد جميع الحسابات أولاً بتحويلها إلى الليرة الجديدة كقيمة مرجعية أساسية.</li>
+                            <li>الليرة القديمة تحوّل بقسمتها على 100.</li>
+                            <li>الدولار الأمريكي يضرب بسعر صرفه مقابل الليرة الجديدة.</li>
+                            <li>الليرة التركية تضرب بسعر صرفها مقابل الليرة الجديدة.</li>
+                        </ul>
+                    </div>
+                </section>
 
+            </main>
             <footer class="footer">
                 <div class="footer-brand">
                     <a id="mirawareWebsiteLink" href="https://www.miraware.net/" target="_blank" rel="noopener noreferrer" aria-label="Miraware Website">

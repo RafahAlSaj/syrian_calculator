@@ -1,4 +1,7 @@
-﻿const el = (id) => document.getElementById(id);
+
+
+
+const el = (id) => document.getElementById(id);
 
 const OLD_PER_NEW = 100;
 
@@ -398,10 +401,16 @@ function fitAllAmountInputs() {
 }
 
 function fitResultValues() {
-    fitTextToBox(ui.settledOld, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
-    fitTextToBox(ui.settledNew, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
-    fitTextToBox(ui.balanceOld, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
-    fitTextToBox(ui.balanceNew, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
+    const values = [ui.settledOld, ui.settledNew, ui.balanceOld, ui.balanceNew];
+    values.forEach(node => {
+        if (!node) return;
+        fitTextToBox(node, RESULT_MIN_FONT_SIZE, RESULT_MAX_FONT_SIZE);
+        
+        // Add pulse animation
+        node.classList.remove("result-pulse");
+        void node.offsetWidth; // Trigger reflow
+        node.classList.add("result-pulse");
+    });
 }
 
 function setNeutralResultMessage(message) {
@@ -432,13 +441,13 @@ function saveRatesToStorage() {
 }
 
 function updateRateChips() {
-    const usdRaw = getRateRawText("usd");
-    const tryRaw = getRateRawText("try");
-    const usdText = usdRaw.trim()
-        ? formatNumericStringWithGrouping(usdRaw)
+    const usdNum = getRateNumber("usd");
+    const tryNum = getRateNumber("try");
+    const usdText = usdNum > 0
+        ? formatNumericStringWithGrouping(String(roundToDecimals(usdNum, USD_TRY_DISPLAY_DECIMALS)))
         : "غير محدد";
-    const tryText = tryRaw.trim()
-        ? formatNumericStringWithGrouping(tryRaw)
+    const tryText = tryNum > 0
+        ? formatNumericStringWithGrouping(String(roundToDecimals(tryNum, USD_TRY_DISPLAY_DECIMALS)))
         : "غير محدد";
     getRateChips("usd").forEach((node) => {
         node.textContent = usdText;
@@ -591,9 +600,10 @@ function setPriceFieldsFromNew(newValue) {
 
     inputs.priceOld.value = formatNumericStringWithGrouping(String(oldValue));
     inputs.priceNew.value = formatNumericStringWithGrouping(String(normalizedNewValue));
-    // Round USD and TRY to 2 decimals for display
+    // Round USD and TRY to USD_TRY_DISPLAY_DECIMALS decimals for display
     inputs.priceUsd.value = usdValue > 0 ? formatNumericStringWithGrouping(String(roundToDecimals(usdValue, USD_TRY_DISPLAY_DECIMALS))) : "";
     inputs.priceTry.value = tryValue > 0 ? formatNumericStringWithGrouping(String(roundToDecimals(tryValue, USD_TRY_DISPLAY_DECIMALS))) : "";
+
 }
 
 function syncPriceFromField(sourceField) {
@@ -617,7 +627,6 @@ function syncPriceFromField(sourceField) {
             inputs.priceOld.value = "";
             inputs.priceNew.value = "";
             inputs.priceTry.value = "";
-            inputs.priceUsd.value = sourceValue > 0 ? formatNumericStringWithGrouping(String(roundToDecimals(sourceValue, USD_TRY_DISPLAY_DECIMALS))) : "";
             return;
         }
         newValue = sourceValue * usdRate;
@@ -626,7 +635,6 @@ function syncPriceFromField(sourceField) {
             inputs.priceOld.value = "";
             inputs.priceNew.value = "";
             inputs.priceUsd.value = "";
-            inputs.priceTry.value = sourceValue > 0 ? formatNumericStringWithGrouping(String(roundToDecimals(sourceValue, USD_TRY_DISPLAY_DECIMALS))) : "";
             return;
         }
         newValue = sourceValue * tryRate;
@@ -664,8 +672,11 @@ function recalc() {
 
     const paidOldAsNew = readNonNegativeNumber(inputs.paidOld.value) / OLD_PER_NEW;
     const paidNew = readNonNegativeNumber(inputs.paidNew.value);
-    const paidUsdAsNew = paidUsd * usdRate;
-    const paidTryAsNew = paidTry * tryRate;
+    const paidUsdRounded = roundToDecimals(paidUsd, USD_TRY_DISPLAY_DECIMALS);
+    const paidTryRounded = roundToDecimals(paidTry, USD_TRY_DISPLAY_DECIMALS);
+    const paidUsdAsNew = paidUsdRounded * usdRate;
+    const paidTryAsNew = paidTryRounded * tryRate;
+
 
     const totalPaidNew = clampToMax(paidOldAsNew + paidNew + paidUsdAsNew + paidTryAsNew);
     const diffNewRaw = clampSignedMagnitude(priceNew - totalPaidNew);
@@ -750,21 +761,53 @@ function toLocalArabicTime(utcText) {
 }
 
 function bindAmountFieldFormatting() {
-    GROUPED_AMOUNT_FIELDS.forEach((id) => {
+    const fieldsToBind = [
+        ...GROUPED_AMOUNT_FIELDS,
+        "usdRate",
+        "tryRate",
+        "priceUsdRate",
+        "priceTryRate"
+    ];
+    fieldsToBind.forEach((id) => {
         const node = inputs[id];
         if (!node) return;
-        node.addEventListener("blur", () => {
+        const isUsdTry = id.toLowerCase().includes("usd") || id.toLowerCase().includes("try");
+        const decimals = isUsdTry ? USD_TRY_DISPLAY_DECIMALS : DISPLAY_DECIMALS;
+
+        const handleBlurOrChange = () => {
+            const val = readNonNegativeNumber(node.value);
+            if (val > 0) {
+                node.value = String(roundToDecimals(val, decimals));
+            }
             formatAmountInputLive(node);
             fitTextToBox(node, INPUT_MIN_FONT_SIZE, INPUT_MAX_FONT_SIZE);
-        });
-        node.addEventListener("change", () => {
-            formatAmountInputLive(node);
-            fitTextToBox(node, INPUT_MIN_FONT_SIZE, INPUT_MAX_FONT_SIZE);
-        });
+        };
+
+        node.addEventListener("blur", handleBlurOrChange);
+        node.addEventListener("change", handleBlurOrChange);
     });
 }
 
 function bindEvents() {
+    // Theme Toggle Logic
+    const themeToggle = el("themeToggle");
+    const sunIcon = themeToggle.querySelector(".sun-icon");
+    const moonIcon = themeToggle.querySelector(".moon-icon");
+
+    themeToggle.addEventListener("click", () => {
+        const isDark = document.body.classList.toggle("dark-mode");
+        sunIcon.style.display = isDark ? "none" : "block";
+        moonIcon.style.display = isDark ? "block" : "none";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+    });
+
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        sunIcon.style.display = "none";
+        moonIcon.style.display = "block";
+    }
+
     if (ui.mirawareWebsiteLink) {
         ui.mirawareWebsiteLink.addEventListener("click", (ev) => {
             ev.preventDefault();

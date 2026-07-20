@@ -1,4 +1,4 @@
-﻿const el = (id) => document.getElementById(id);
+const el = (id) => document.getElementById(id);
 
 const OLD_PER_NEW = 100;
 

@@ -1,0 +1,6 @@
+{
+  "name": "Syrian Calculator",
+  "description": "A Syrian Lira calculator designed to convert and reconcile Old vs New Syrian Lira, USD, and Turkish Lira.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
