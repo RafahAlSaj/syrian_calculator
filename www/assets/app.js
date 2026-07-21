@@ -10,51 +10,17 @@ const state = {
     priceSourceField: null,
 };
 
-const inputs = {
-    priceOld: el("priceOld"),
-    priceNew: el("priceNew"),
-    priceUsd: el("priceUsd"),
-    priceTry: el("priceTry"),
-    priceUsdRate: el("priceUsdRate"),
-    priceTryRate: el("priceTryRate"),
-    paidOld: el("paidOld"),
-    paidNew: el("paidNew"),
-    paidUsd: el("paidUsd"),
-    paidTry: el("paidTry"),
-    usdRate: el("usdRate"),
-    tryRate: el("tryRate"),
-};
+const inputs = new Proxy({}, {
+    get(target, prop) {
+        return el(prop);
+    }
+});
 
-const ui = {
-    topReset: el("topReset"),
-    resetAll: el("resetAll"),
-    settledOld: el("settledOld"),
-    settledNew: el("settledNew"),
-    resultCard: el("resultCard"),
-    balanceBox: el("balanceBox"),
-    balanceTitle: el("balanceTitle"),
-    balanceOld: el("balanceOld"),
-    balanceNew: el("balanceNew"),
-    paymentsTitle: el("paymentsTitle"),
-    paidOldLabel: el("paidOldLabel"),
-    paidNewLabel: el("paidNewLabel"),
-    resultTitle: el("resultTitle"),
-    mirawareWebsiteLink: el("mirawareWebsiteLink"),
-
-    priceUsdRateChip: el("priceUsdRateChip"),
-    priceTryRateChip: el("priceTryRateChip"),
-    priceUsdRateBtn: el("priceUsdRateBtn"),
-    priceTryRateBtn: el("priceTryRateBtn"),
-    priceUsdRatePopover: el("priceUsdRatePopover"),
-    priceTryRatePopover: el("priceTryRatePopover"),
-
-    usdRateChip: el("usdRateChip"),
-    tryRateChip: el("tryRateChip"),
-    usdRateBtn: el("usdRateBtn"),
-    tryRateBtn: el("tryRateBtn"),
-    usdRatePopover: el("usdRatePopover"),
-    tryRatePopover: el("tryRatePopover"),
-};
+const ui = new Proxy({}, {
+    get(target, prop) {
+        return el(prop);
+    }
+});
 
 const GROUPED_AMOUNT_FIELDS = [
     "priceOld",
@@ -458,6 +424,9 @@ function updateRateChips() {
 }
 
 function loadRatesFromStorage() {
+    const DEFAULT_USD_RATE = 150;
+    const DEFAULT_TRY_RATE = 4.5;
+
     let usdStored = 0;
     let tryStored = 0;
     try {
@@ -482,10 +451,18 @@ function loadRatesFromStorage() {
         usdStored = 0;
         tryStored = 0;
     }
-    // Defaults are in "ليرة جديدة" per 1 unit of currency.
-    // If you want to override, edit the inputs directly in the UI.
-    const usdValue = usdStored > 0 ? String(usdStored) : "";
-    const tryValue = tryStored > 0 ? String(tryStored) : "";
+    // Fall back to robust real-market defaults if not set yet.
+    if (!(usdStored > 0)) {
+        usdStored = DEFAULT_USD_RATE;
+        try { localStorage.setItem(STORAGE_KEYS.usdRate, String(DEFAULT_USD_RATE)); } catch {}
+    }
+    if (!(tryStored > 0)) {
+        tryStored = DEFAULT_TRY_RATE;
+        try { localStorage.setItem(STORAGE_KEYS.tryRate, String(DEFAULT_TRY_RATE)); } catch {}
+    }
+
+    const usdValue = String(usdStored);
+    const tryValue = String(tryStored);
     setRateValue("usd", usdValue);
     setRateValue("try", tryValue);
     updateRateChips();

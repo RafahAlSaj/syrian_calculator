@@ -1,4 +1,4 @@
-const CACHE_NAME = "syrian-calculator-v24";
+const CACHE_NAME = "syrian-calculator-v27";
 
 const ASSETS = [
     "./",
@@ -28,21 +28,26 @@ self.addEventListener("fetch", (event) => {
     const req = event.request;
     if (req.method !== "GET") return;
 
+    // Network-First Strategy: try network first, fallback to cache
     event.respondWith(
-        caches.match(req).then((cached) => {
-            if (cached) return cached;
-            return fetch(req)
-                .then((res) => {
-                    const isHttp = req.url.startsWith("http://") || req.url.startsWith("https://");
-                    const sameOrigin = isHttp && new URL(req.url).origin === self.location.origin;
-                    const cacheable = sameOrigin && res && res.ok && res.type === "basic";
-                    if (cacheable) {
-                        const copy = res.clone();
-                        caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+        fetch(req)
+            .then((res) => {
+                const isHttp = req.url.startsWith("http://") || req.url.startsWith("https://");
+                const sameOrigin = isHttp && new URL(req.url).origin === self.location.origin;
+                const cacheable = sameOrigin && res && res.ok && res.type === "basic";
+                if (cacheable) {
+                    const copy = res.clone();
+                    caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+                }
+                return res;
+            })
+            .catch(() => {
+                return caches.match(req).then((cached) => {
+                    if (cached) return cached;
+                    if (req.mode === "navigate") {
+                        return caches.match("./index.html");
                     }
-                    return res;
-                })
-                .catch(() => caches.match("./index.html"));
-        })
+                });
+            })
     );
 });

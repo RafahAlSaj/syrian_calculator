@@ -1,51 +1,59 @@
 :root {
-    --bg-color: #f3f6fa;
+    --bg-color: #f1f5f9;
     --text-color: #0f172a;
-    --muted-color: #64748b;
-    --border-color: rgba(148, 163, 184, 0.12);
+    --muted-color: #475569;
+    --border-color: rgba(148, 163, 184, 0.3);
     
-    /* Advanced Shadow Crafting */
-    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-    --shadow-premium: 0 12px 24px -4px rgba(148, 163, 184, 0.15), 0 4px 12px -2px rgba(148, 163, 184, 0.08);
-    --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.03);
+    /* Advanced Shadow Crafting - Strengthened and deepened for premium depth and pop */
+    --shadow-soft: 0 4px 12px -2px rgba(15, 23, 42, 0.1), 0 2px 6px -1px rgba(15, 23, 42, 0.06);
+    --shadow-premium: 0 16px 32px -4px rgba(15, 23, 42, 0.12), 0 6px 16px -2px rgba(15, 23, 42, 0.08);
+    --shadow-inset: inset 0 2px 5px 0 rgba(15, 23, 42, 0.05);
     
-    /* Premium Themes for Cards */
-    --card-amber-bg: #ffffff;
-    --card-amber-border: #fcd34d;
-    --card-amber-glow: 0 10px 30px -10px rgba(245, 158, 11, 0.12);
+    /* Premium Themes for Cards - Highly visible borders and beautiful soft backgrounds matching the screenshot exactly */
+    --card-amber-bg: #fffbf0; /* Soft warm rich peach/yellow background for Section 1 */
+    --card-amber-border: #fbbf24; /* Solid vibrant gold-amber-500 border */
+    --card-amber-glow: 0 12px 30px -8px rgba(245, 158, 11, 0.2);
     
-    --card-blue-bg: #ffffff;
-    --card-blue-border: #93c5fd;
-    --card-blue-glow: 0 10px 30px -10px rgba(59, 130, 246, 0.12);
+    --card-blue-bg: #f0f7ff; /* Soft sky-blue/lavender card background for Section 2 */
+    --card-blue-border: #3b82f6; /* Solid bright vibrant blue border */
+    --card-blue-glow: 0 12px 30px -8px rgba(59, 130, 246, 0.2);
     
-    --card-red-bg: #ffffff;
-    --card-red-border: #fca5a5;
-    --card-red-glow: 0 10px 30px -10px rgba(239, 68, 68, 0.12);
+    --card-red-bg: #fff5f5; /* Soft warm rose-pink card background for Section 3 */
+    --card-red-border: #ef4444; /* Solid vibrant red border */
+    --card-red-glow: 0 12px 30px -8px rgba(239, 68, 68, 0.2);
     
-    --card-slate-bg: #ffffff;
-    --card-slate-border: #cbd5e1;
-    --card-slate-glow: 0 10px 30px -10px rgba(148, 163, 184, 0.12);
+    --card-green-bg: #ecfdf5; /* Beautiful soft emerald green */
+    --card-green-border: #10b981; /* Solid beautiful green border */
+    --card-green-glow: 0 12px 30px -8px rgba(16, 185, 129, 0.2);
+    
+    --card-slate-bg: #f8fafc;
+    --card-slate-border: #94a3b8;
+    --card-slate-glow: 0 12px 30px -8px rgba(148, 163, 184, 0.15);
 
-    /* Tactile Field Styles */
-    --field-old-bg: #fffdf0;
-    --field-old-border: rgba(251, 191, 36, 0.25);
+    /* Tactile Field Styles with Rich Saturated Outlines and beautiful glowing backgrounds matching the screenshot */
+    --field-old-bg: #fef3c7; /* Beautiful warm rich yellow-gold field matching the screenshot exactly */
+    --field-old-border: #fbbf24; /* Solid gold-amber border */
     --field-old-border-focus: #f59e0b;
-    --field-old-text: #b45309;
+    --field-old-text: #78350f; /* Deep warm brown for elegant label contrast and exceptional readability */
 
-    --field-new-bg: #f3fcf7;
-    --field-new-border: rgba(16, 185, 129, 0.2);
+    --field-new-bg: #d1fae5; /* Beautiful, clear saturated mint-green field matching the screenshot exactly */
+    --field-new-border: #34d399; /* Solid bright green border */
     --field-new-border-focus: #10b981;
-    --field-new-text: #15803d;
+    --field-new-text: #064e3b; /* Deep forest green for elegant label contrast and exceptional readability */
 
-    --field-usd-bg: #f0f7ff;
-    --field-usd-border: rgba(59, 130, 246, 0.2);
-    --field-usd-border-focus: #3b82f6;
-    --field-usd-text: #1d4ed8;
+    --field-usd-bg: #ccfbf1; /* Beautiful, clear saturated cyan/teal field matching the screenshot exactly */
+    --field-usd-border: #2dd4bf; /* Solid teal/cyan border */
+    --field-usd-border-focus: #14b8a6;
+    --field-usd-text: #115e59; /* Deep teal/cyan for elegant label contrast and exceptional readability */
 
-    --field-try-bg: #fff5f5;
-    --field-try-border: rgba(239, 68, 68, 0.2);
+    --field-try-bg: #ffe4e6; /* Beautiful, clear saturated rose pink field matching the screenshot exactly */
+    --field-try-border: #fca5a5; /* Solid rose-red border */
     --field-try-border-focus: #ef4444;
-    --field-try-text: #b91c1c;
+    --field-try-text: #9f1239; /* Deep rose-red for elegant label contrast and exceptional readability */
+
+    --result-danger-text: #dc2626; /* Vibrant, clear red for outstanding contrast on returning balances */
+    --result-success-text: #059669; /* Vibrant, clear green for outstanding contrast */
+    --result-neutral-text: #1e293b; /* Crisp dark slate for neutral balance */
 
     --primary-font: "Segoe UI", system-ui, -apple-system, sans-serif;
 }
@@ -61,42 +69,46 @@
     --shadow-inset: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
 
     /* Premium Themes for Cards */
-    --card-amber-bg: #141824;
-    --card-amber-border: rgba(245, 158, 11, 0.3);
-    --card-amber-glow: 0 10px 30px -10px rgba(245, 158, 11, 0.2);
+    --card-amber-bg: #1c1912;
+    --card-amber-border: #fbbf24;
+    --card-amber-glow: 0 10px 30px -10px rgba(251, 191, 36, 0.2);
     
-    --card-blue-bg: #141824;
-    --card-blue-border: rgba(59, 130, 246, 0.3);
+    --card-blue-bg: #0f1b35;
+    --card-blue-border: #3b82f6;
     --card-blue-glow: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
     
-    --card-red-bg: #141824;
-    --card-red-border: rgba(239, 68, 68, 0.3);
+    --card-red-bg: #271111;
+    --card-red-border: #ef4444;
     --card-red-glow: 0 10px 30px -10px rgba(239, 68, 68, 0.2);
     
-    --card-slate-bg: #141824;
-    --card-slate-border: rgba(148, 163, 184, 0.3);
+    --card-slate-bg: #1e293b;
+    --card-slate-border: rgba(148, 163, 184, 0.4);
     --card-slate-glow: 0 10px 30px -10px rgba(148, 163, 184, 0.2);
 
     /* Tactile Field Styles */
-    --field-old-bg: #1c1c1a;
-    --field-old-border: rgba(251, 191, 36, 0.2);
-    --field-old-border-focus: #fbbf24;
-    --field-old-text: #f59e0b;
+    --field-old-bg: #252116;
+    --field-old-border: #fbbf24;
+    --field-old-border-focus: #f59e0b;
+    --field-old-text: #fbc02d;
 
-    --field-new-bg: #111d16;
-    --field-new-border: rgba(16, 185, 129, 0.2);
+    --field-new-bg: #0f2216;
+    --field-new-border: #10b981;
     --field-new-border-focus: #34d399;
-    --field-new-text: #10b981;
+    --field-new-text: #34d399;
 
-    --field-usd-bg: #111a2e;
-    --field-usd-border: rgba(59, 130, 246, 0.2);
+    --field-usd-bg: #0f222f;
+    --field-usd-border: #0ea5e9;
     --field-usd-border-focus: #60a5fa;
-    --field-usd-text: #3b82f6;
+    --field-usd-text: #38bdf8;
 
-    --field-try-bg: #221417;
-    --field-try-border: rgba(239, 68, 68, 0.2);
+    --field-try-bg: #2c1218;
+    --field-try-border: #f43f5e;
     --field-try-border-focus: #f87171;
-    --field-try-text: #ef4444;
+    --field-try-text: #fb7185;
+
+    --result-danger-text: #f87171;
+    --result-success-text: #34d399;
+    --result-neutral-text: #f1f5f9;
 }
 
 * {
@@ -112,6 +124,7 @@ body {
     margin: 0;
     min-height: 100%;
     overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -120,47 +133,57 @@ body {
     background: var(--bg-color);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .app {
+    width: 100%;
     max-width: 480px;
-    margin: 0 auto;
     padding: calc(env(safe-area-inset-top, 0px) + 24px) 20px 48px;
 }
 
 /* Header & Navigation Bar */
 .topbar {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
     align-items: center;
     margin-bottom: 24px;
-    position: relative;
-    padding: 4px 8px;
+    width: 100%;
+    gap: 8px;
 }
 
-.topbar-left {
+.topbar-right-col {
     display: flex;
+    justify-content: flex-start;
+}
+
+.topbar-left-col {
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .title {
     margin: 0;
-    font-size: 22px;
+    font-size: 20px;
     text-align: center;
     font-weight: 850;
     color: var(--text-color);
     letter-spacing: -0.5px;
-    flex-grow: 1;
+    white-space: nowrap;
 }
 
 .theme-toggle {
     background: var(--card-slate-bg);
     border: 1px solid var(--border-color);
     color: var(--text-color);
-    width: 42px;
-    height: 42px;
-    border-radius: 16px;
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
     display: grid;
     place-items: center;
     cursor: pointer;
@@ -173,19 +196,19 @@ body {
 }
 
 .theme-toggle svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
 /* Mode Buttons Styling (قبض / دفع) */
 .mode-btn {
     border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 8px 24px;
-    min-height: 42px;
+    border-radius: 14px;
+    padding: 8px 16px;
+    min-height: 38px;
     font-weight: 800;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     background: var(--card-slate-bg);
     color: var(--muted-color);
     box-shadow: var(--shadow-soft);
@@ -215,7 +238,7 @@ body {
     border-radius: 28px;
     padding: 20px;
     box-shadow: var(--shadow-premium);
-    border-width: 1.5px;
+    border-width: 2px;
     border-style: solid;
     position: relative;
     overflow: visible;
@@ -287,7 +310,7 @@ body {
     align-items: stretch;
     justify-content: flex-start;
     position: relative;
-    border-width: 1.5px;
+    border-width: 2px;
     border-style: solid;
     min-height: 104px;
     box-shadow: var(--shadow-inset);
@@ -333,12 +356,26 @@ body {
     box-shadow: var(--shadow-soft), 0 0 0 3px rgba(239, 68, 68, 0.15);
 }
 
+.field-amber .field-label {
+    color: var(--field-old-text) !important;
+}
+.field-green .field-label {
+    color: var(--field-new-text) !important;
+}
+.field-emerald .field-label {
+    color: var(--field-usd-text) !important;
+}
+.field-rose .field-label {
+    color: var(--field-try-text) !important;
+}
+
 .field-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-bottom: 8px;
+    gap: 8px;
 }
 
 .field-label {
@@ -348,6 +385,7 @@ body {
     display: flex;
     align-items: center;
     gap: 6px;
+    white-space: nowrap;
 }
 
 .currency-flag {
@@ -356,12 +394,15 @@ body {
 
 /* Rate Chip & Configuration Area */
 .rate-chip-area {
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     background: rgba(0, 0, 0, 0.04);
-    padding: 3px 8px;
-    border-radius: 10px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    flex-wrap: nowrap !important;
 }
 
 .dark-mode .rate-chip-area {
@@ -376,6 +417,7 @@ body {
     font-weight: 800;
     color: var(--text-color);
     cursor: pointer;
+    white-space: nowrap !important;
 }
 
 .rate-gear {
@@ -446,24 +488,24 @@ body {
     text-align: right;
     padding: 2px 0;
 }
-
-.field-amber .field-input { color: var(--field-old-text); }
-.field-green .field-input { color: var(--field-new-text); }
-.field-emerald .field-input { color: var(--field-usd-text); }
-.field-rose .field-input { color: var(--field-try-text); }
-
 /* Results & Settle Display */
 #resultCard {
-    background: var(--card-red-bg);
-    border-color: var(--card-red-border);
-    box-shadow: var(--shadow-premium), var(--card-red-glow);
+    background: var(--card-slate-bg);
+    border-color: var(--card-slate-border);
+    box-shadow: var(--shadow-premium), var(--card-slate-glow);
     padding: 22px;
 }
 
+#resultCard.status-danger {
+    background: var(--card-red-bg);
+    border-color: var(--card-red-border);
+    box-shadow: var(--shadow-premium), var(--card-red-glow);
+}
+
 #resultCard.status-success {
-    background: var(--card-blue-bg);
-    border-color: var(--card-blue-border);
-    box-shadow: var(--shadow-premium), var(--card-blue-glow);
+    background: var(--card-green-bg);
+    border-color: var(--card-green-border);
+    box-shadow: var(--shadow-premium), var(--card-green-glow);
 }
 
 #resultCard.status-neutral {
@@ -477,7 +519,7 @@ body {
     padding: 16px;
     text-align: right;
     box-shadow: var(--shadow-soft);
-    border-width: 1.5px;
+    border-width: 2px;
     border-style: solid;
 }
 
@@ -498,6 +540,14 @@ body {
     margin-bottom: 4px;
 }
 
+.result-old .result-label {
+    color: var(--field-old-text);
+}
+
+.result-new .result-label {
+    color: var(--field-new-text);
+}
+
 .result-value {
     font-size: 26px;
     font-weight: 900;
@@ -508,6 +558,16 @@ body {
 /* Beautiful color tags */
 .result-old .result-value { color: var(--field-old-text); }
 .result-new .result-value { color: var(--field-new-text); }
+
+#resultCard.status-danger .result-value {
+    color: var(--result-danger-text) !important;
+}
+#resultCard.status-success .result-value {
+    color: var(--result-success-text) !important;
+}
+#resultCard.status-neutral .result-value {
+    color: var(--result-neutral-text) !important;
+}
 
 /* Balance / Remainder Box */
 .balance-box {
@@ -617,13 +677,47 @@ body {
     transform: scale(0.96);
 }
 
+.footer-logo-neon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 22px;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 1.5px solid rgba(16, 185, 129, 0.35);
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.15), 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
+    user-select: none;
+}
+
+.dark-mode .footer-logo-neon {
+    background: rgba(15, 23, 42, 0.95);
+    border: 1.5px solid #10b981;
+    box-shadow: 0 0 22px rgba(16, 185, 129, 0.55), inset 0 0 12px rgba(16, 185, 129, 0.25);
+}
+
+.dark-mode .footer-logo-neon:hover {
+    box-shadow: 0 0 32px rgba(16, 185, 129, 0.8), inset 0 0 16px rgba(16, 185, 129, 0.35);
+    border-color: #34d399;
+}
+
 .footer-logo {
-    width: 120px;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06));
+    width: 125px;
+    height: auto;
+    display: block;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.05));
 }
 
 .dark-mode .footer-logo {
-    filter: brightness(0.9) drop-shadow(0 2px 4px rgba(255,255,255,0.08));
+    filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(16, 185, 129, 0.6));
+    opacity: 1;
+}
+
+.dark-mode .footer-logo-neon:hover .footer-logo {
+    opacity: 1;
+    transform: scale(1.03);
 }
 
 .footer-social {
