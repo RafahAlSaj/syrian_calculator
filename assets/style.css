@@ -137,12 +137,17 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
 .app {
     width: 100%;
     max-width: 480px;
+    margin: 0 auto;
     padding: calc(env(safe-area-inset-top, 0px) + 24px) 20px 48px;
+    position: relative;
 }
 
 /* Header & Navigation Bar */
